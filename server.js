@@ -60,6 +60,7 @@ app.get("/character", async (req, res) => {
   }
 });
 
+// CREATE ROUTE
 app.post("/character", async (req, res) => {
   try {
     // send all characters
@@ -70,6 +71,7 @@ app.post("/character", async (req, res) => {
   }
 });
 
+//DELETE ROUTE
 app.delete("/character/:id", async (req, res) => {
   try {
     res.json(await character.findByIdAndRemove(req.params.id));
@@ -79,6 +81,7 @@ app.delete("/character/:id", async (req, res) => {
   }
 });
 
+//UPDATE ROUTE
 app.put("/character/:id", async (req, res) => {
   try {
     res.json(
