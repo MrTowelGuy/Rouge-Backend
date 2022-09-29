@@ -49,7 +49,16 @@ app.get("/", (req, res) => {
   res.send("Taveron");
 });
 
-
+// PEOPLE INDEX ROUTE
+app.get("/character", async (req, res) => {
+  try {
+    // send all characters
+    res.json(await character.find({}));
+  } catch (error) {
+    //send error
+    res.status(400).json(error);
+  }
+});
 
 
 
