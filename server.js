@@ -27,6 +27,15 @@ mongoose.connection
   .on("close", () => console.log("You are disconnected from mongoose"))
   .on("error", (error) => console.log(error));
 
+// MODELS
+////////////////////////////////
+const characterSchema = new mongoose.Schema({
+    name: String,
+    image: String
+});
+
+const character = mongoose.model("character", characterSchema);
+
 // MiddleWare
 ////////////////////////////////
 app.use(cors()); // to prevent cors errors, open access to all origins
