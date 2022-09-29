@@ -60,7 +60,6 @@ app.get("/character", async (req, res) => {
   }
 });
 
-//Create
 app.post("/character", async (req, res) => {
   try {
     // send all characters
@@ -71,7 +70,14 @@ app.post("/character", async (req, res) => {
   }
 });
 
-
+app.delete("/character/:id", async (req, res) => {
+  try {
+    res.json(await character.findByIdAndRemove(req.params.id));
+  } catch (error) {
+    //send error
+    res.status(400).json(error);
+  }
+});
 
 
 
