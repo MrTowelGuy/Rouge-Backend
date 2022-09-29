@@ -16,25 +16,6 @@ const morgan = require("morgan");
 
 // DATABASE CONNECTION
 ////////////////////////////////
-// Establish Connection
-mongoose.connect(MONGODB_URL, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
-// Connection Events
-mongoose.connection
-  .on("open", () => console.log("You are connected to mongoose"))
-  .on("close", () => console.log("You are disconnected from mongoose"))
-  .on("error", (error) => console.log(error));
-
-// MODELS
-////////////////////////////////
-const characterSchema = new mongoose.Schema({
-    name: String,
-    image: String
-});
-
-const character = mongoose.model("character", characterSchema);
 
 // MiddleWare
 ////////////////////////////////
@@ -42,53 +23,14 @@ app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging
 app.use(express.json()); // parse json bodies
 
-// ROUTES
-////////////////////////////////
-// create a test route
-app.get("/", (req, res) => {
-  res.send("Taveron");
-});
 
-// PEOPLE INDEX ROUTE
-app.get("/character", async (req, res) => {
-  try {
-    // send all characters
-    res.json(await character.find({}));
-  } catch (error) {
-    //send error
-    res.status(400).json(error);
-  }
-});
 
-app.post("/character", async (req, res) => {
-  try {
-    // send all characters
-    res.json(await character.create(req.body));
-  } catch (error) {
-    //send error
-    res.status(400).json(error);
-  }
-});
 
-app.delete("/character/:id", async (req, res) => {
-  try {
-    res.json(await character.findByIdAndRemove(req.params.id));
-  } catch (error) {
-    //send error
-    res.status(400).json(error);
-  }
-});
 
-app.put("/character/:id", async (req, res) => {
-  try {
-    res.json(
-      await character.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    );
-  } catch (error) {
-    //send error
-    res.status(400).json(error);
-  }
-});
+
+
+
+
 
 // LISTENER
 ////////////////////////////////
